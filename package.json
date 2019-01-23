@@ -1,0 +1,30 @@
+{
+  "name": "@leofavre/github-memory-game",
+  "version": "1.0.0",
+  "description": "A memory game that uses GitHub API to fetch images from your colleagues",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leofavre/github-memory-game.git"
+  },
+  "keywords": [
+    "game",
+    "memory",
+    "game",
+    "web",
+    "components",
+    "github"
+  ],
+  "author": "Leonardo Favre <leo@leofavre.com> (https://www.leofavre.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leofavre/github-memory-game/issues"
+  },
+  "homepage": "https://github.com/leofavre/github-memory-game#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}
