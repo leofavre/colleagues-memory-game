@@ -1,5 +1,5 @@
 {
-  "name": "@leofavre/github-memory-game",
+  "name": "github-memory-game",
   "version": "1.0.0",
   "description": "A memory game that uses GitHub API to fetch images from your colleagues",
   "main": "index.js",
@@ -26,5 +26,19 @@
   "homepage": "https://github.com/leofavre/github-memory-game#readme",
   "publishConfig": {
     "access": "public"
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/git": "^7.0.8",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.12.1",
+    "eslint-config-semistandard": "^13.0.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-standard": "^4.0.0",
+    "semantic-release": "^15.13.3",
+    "semistandard": "^13.0.1"
   }
 }
