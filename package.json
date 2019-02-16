@@ -1,14 +1,14 @@
 {
-  "name": "github-memory-game",
-  "version": "1.0.0",
+  "name": "colleagues-memory-game",
+  "version": "0.1.0",
   "description": "A memory game that uses GitHub API to fetch images from your colleagues",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/leofavre/github-memory-game.git"
+    "url": "git+https://github.com/leofavre/colleagues-memory-game.git"
   },
   "keywords": [
     "game",
@@ -21,9 +21,9 @@
   "author": "Leonardo Favre <leo@leofavre.com> (https://www.leofavre.com/)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/leofavre/github-memory-game/issues"
+    "url": "https://github.com/leofavre/colleagues-memory-game/issues"
   },
-  "homepage": "https://github.com/leofavre/github-memory-game#readme",
+  "homepage": "https://github.com/leofavre/colleagues-memory-game#readme",
   "publishConfig": {
     "access": "public"
   },
@@ -35,11 +35,15 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-standard": "^4.0.0",
-    "semistandard": "^13.0.1"
+    "semistandard": "^13.0.1",
+    "nodemon": "^1.18.10"
   },
   "dependencies": {
     "dot-env": "0.0.1",
     "dotenv": "^6.2.0",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "random-string": "^0.2.0",
+    "randomstring": "^1.1.5"
   }
 }
