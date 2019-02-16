@@ -28,9 +28,6 @@
     "access": "public"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^3.0.2",
-    "@semantic-release/git": "^7.0.8",
-    "coveralls": "^3.0.2",
     "eslint": "^5.12.1",
     "eslint-config-semistandard": "^13.0.0",
     "eslint-config-standard": "^12.0.0",
@@ -38,7 +35,11 @@
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-standard": "^4.0.0",
-    "semantic-release": "^15.13.3",
     "semistandard": "^13.0.1"
+  },
+  "dependencies": {
+    "dot-env": "0.0.1",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4"
   }
 }
