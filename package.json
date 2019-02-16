@@ -4,7 +4,8 @@
   "description": "A memory game that uses GitHub API to fetch images from your colleagues",
   "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx nodemon ./server/index.js"
   },
   "repository": {
     "type": "git",
@@ -39,10 +40,12 @@
     "nodemon": "^1.18.10"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "dot-env": "0.0.1",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "querystring": "^0.2.0",
     "random-string": "^0.2.0",
     "randomstring": "^1.1.5"
   }

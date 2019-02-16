@@ -1,9 +1,9 @@
 const app = require('./app/index.js');
-const dotenv = require('dotenv');
+const { HOST, PORT } = require('./constants.js');
 
-dotenv.config();
-const { HOST, PORT } = process.env;
-
+require('./routes/login.js')(app);
+require('./routes/oauth.js')(app);
+require('./routes/user.js')(app);
 require('./routes/index.js')(app);
 
 app.listen(PORT, () => {
