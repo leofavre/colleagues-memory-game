@@ -3,9 +3,9 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const { HOST, PORT } = process.env;
+const { HOST, PORT, NODE_ENV } = process.env;
 
-const REDIRECT_URI = PORT
+const REDIRECT_URI = (NODE_ENV === 'development')
   ? `${HOST}:${PORT}/oauth`
   : `${HOST}/oauth`;
 
