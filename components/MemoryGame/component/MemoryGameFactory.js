@@ -55,6 +55,23 @@ export const MemoryGameFactory = (Base = class {}) => view =>
       return ['rows', 'columns', 'selected'];
     }
 
+    connectedCallback () {
+      if (super.connectedCallback) {
+        super.connectedCallback();
+      }
+
+      this._handleClick = this._handleClick.bind(this);
+      this.renderRoot.addEventListener('click', this._handleClick);
+    }
+
+    disconnectedCallback () {
+      if (super.disconnectedCallback) {
+        super.disconnectedCallback();
+      }
+
+      this.renderRoot.removeEventListener('click', this._handleClick);
+    }
+
     _handleRowsChanged (rows) {
       this.board.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
     }
@@ -67,5 +84,13 @@ export const MemoryGameFactory = (Base = class {}) => view =>
       this.cards.forEach((card, index) => {
         setAttr(card, 'revealed', selected.includes(index));
       });
+    }
+
+    _handleClick ({ target: card }) {
+      const index = this.cards.indexOf(card);
+
+      if (index >= 0) {
+        this._dispatchEventAndCallMethod('try', { index, card });
+      }
     }
   };
