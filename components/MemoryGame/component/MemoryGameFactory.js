@@ -1,6 +1,7 @@
 import { parseNumericAttr } from '../../../helpers/parseNumericAttr.js';
 import { parseArrayAttr } from '../../../helpers/parseArrayAttr.js';
 import { setAttr } from '../../../helpers/setAttr.js';
+import { unique } from '../../../helpers/unique.js';
 
 export const MemoryGameFactory = (Base = class {}) => view =>
   class extends Base {
@@ -27,12 +28,12 @@ export const MemoryGameFactory = (Base = class {}) => view =>
       setAttr(this, 'columns', value);
     }
 
-    get selected () {
-      return parseArrayAttr(this.getAttribute('selected'));
+    get revealed () {
+      return parseArrayAttr(this.getAttribute('revealed')) || [];
     }
 
-    set selected (value) {
-      setAttr(this, 'selected', value);
+    set revealed (value) {
+      setAttr(this, 'revealed', unique(value));
     }
 
     get total () {
@@ -52,7 +53,7 @@ export const MemoryGameFactory = (Base = class {}) => view =>
     }
 
     static get observedAttributes () {
-      return ['rows', 'columns', 'selected'];
+      return ['rows', 'columns', 'revealed'];
     }
 
     connectedCallback () {
@@ -80,9 +81,9 @@ export const MemoryGameFactory = (Base = class {}) => view =>
       this.board.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
     }
 
-    _handleSelectedChanged (selected) {
+    _handleRevealedChanged (revealed) {
       this.cards.forEach((card, index) => {
-        setAttr(card, 'revealed', selected.includes(index));
+        setAttr(card, 'revealed', revealed.includes(index));
       });
     }
 
