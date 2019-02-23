@@ -1,8 +1,7 @@
-import { upperCaseFirst } from '../../../helpers/upperCaseFirst.js';
 import { parseNumericAttr } from '../../../helpers/parseNumericAttr.js';
 import { parseArrayAttr } from '../../../helpers/parseArrayAttr.js';
 import { setAttr } from '../../../helpers/setAttr.js';
-import { delay } from '../../../helpers/delay.js';
+import { unique } from '../../../helpers/unique.js';
 
 export const MemoryGameFactory = (Base = class {}) => view =>
   class extends Base {
@@ -29,12 +28,12 @@ export const MemoryGameFactory = (Base = class {}) => view =>
       setAttr(this, 'columns', value);
     }
 
-    get selected () {
-      return parseArrayAttr(this.getAttribute('selected'));
+    get revealed () {
+      return parseArrayAttr(this.getAttribute('revealed')) || [];
     }
 
-    set selected (value) {
-      setAttr(this, 'selected', value);
+    set revealed (value) {
+      setAttr(this, 'revealed', unique(value));
     }
 
     get total () {
@@ -54,7 +53,7 @@ export const MemoryGameFactory = (Base = class {}) => view =>
     }
 
     static get observedAttributes () {
-      return ['rows', 'columns', 'selected'];
+      return ['rows', 'columns', 'revealed'];
     }
 
     connectedCallback () {
@@ -62,33 +61,37 @@ export const MemoryGameFactory = (Base = class {}) => view =>
         super.connectedCallback();
       }
 
-      this._upgradeProperties(this.constructor.observedAttributes);
+      this._handleClick = this._handleClick.bind(this);
+      this.renderRoot.addEventListener('click', this._handleClick);
     }
 
-    attributeChangedCallback (attrName, oldValue, newValue) {
-      if (super.attributeChangedCallback) {
-        super.attributeChangedCallback(attrName, oldValue, newValue);
+    disconnectedCallback () {
+      if (super.disconnectedCallback) {
+        super.disconnectedCallback();
       }
 
-      if (oldValue !== newValue) {
-        this[`_handle${upperCaseFirst(attrName)}Changed`](newValue);
-      }
+      this.renderRoot.removeEventListener('click', this._handleClick);
     }
 
-    async _handleRowsChanged (rows) {
-      await delay();
+    _handleRowsChanged (rows) {
       this.board.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
     }
 
-    async _handleColumnsChanged (columns) {
-      await delay();
+    _handleColumnsChanged (columns) {
       this.board.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
     }
 
-    async _handleSelectedChanged (selected) {
-      await delay();
+    _handleRevealedChanged (revealed) {
       this.cards.forEach((card, index) => {
-        setAttr(card, 'selected', selected.includes(index));
+        setAttr(card, 'revealed', revealed.includes(index));
       });
+    }
+
+    _handleClick ({ target: card }) {
+      const index = this.cards.indexOf(card);
+
+      if (index >= 0) {
+        this._dispatchEventAndCallMethod('try', { index, card });
+      }
     }
   };
