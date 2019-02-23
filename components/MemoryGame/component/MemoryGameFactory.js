@@ -1,8 +1,6 @@
-import { upperCaseFirst } from '../../../helpers/upperCaseFirst.js';
 import { parseNumericAttr } from '../../../helpers/parseNumericAttr.js';
 import { parseArrayAttr } from '../../../helpers/parseArrayAttr.js';
 import { setAttr } from '../../../helpers/setAttr.js';
-import { delay } from '../../../helpers/delay.js';
 
 export const MemoryGameFactory = (Base = class {}) => view =>
   class extends Base {
@@ -57,38 +55,17 @@ export const MemoryGameFactory = (Base = class {}) => view =>
       return ['rows', 'columns', 'selected'];
     }
 
-    connectedCallback () {
-      if (super.connectedCallback) {
-        super.connectedCallback();
-      }
-
-      this._upgradeProperties(this.constructor.observedAttributes);
-    }
-
-    attributeChangedCallback (attrName, oldValue, newValue) {
-      if (super.attributeChangedCallback) {
-        super.attributeChangedCallback(attrName, oldValue, newValue);
-      }
-
-      if (oldValue !== newValue) {
-        this[`_handle${upperCaseFirst(attrName)}Changed`](newValue);
-      }
-    }
-
-    async _handleRowsChanged (rows) {
-      await delay();
+    _handleRowsChanged (rows) {
       this.board.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
     }
 
-    async _handleColumnsChanged (columns) {
-      await delay();
+    _handleColumnsChanged (columns) {
       this.board.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
     }
 
-    async _handleSelectedChanged (selected) {
-      await delay();
+    _handleSelectedChanged (selected) {
       this.cards.forEach((card, index) => {
-        setAttr(card, 'selected', selected.includes(index));
+        setAttr(card, 'revealed', selected.includes(index));
       });
     }
   };

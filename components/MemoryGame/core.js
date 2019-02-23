@@ -1,7 +1,7 @@
 import { MemoryGameFactory } from './component/MemoryGameFactory.js';
 import { MemoryGameView } from './component/MemoryGameView.js';
-import { withComponent } from '../../hocs/withComponent.js';
+import { WithComponent } from '../../hocs/WithComponent.js';
 
-const MemoryGameController = MemoryGameFactory(withComponent(HTMLElement));
+const MemoryGameController = MemoryGameFactory(WithComponent(HTMLElement));
 
 export { MemoryGameController, MemoryGameView };
