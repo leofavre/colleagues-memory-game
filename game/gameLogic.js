@@ -28,13 +28,8 @@ Object.defineProperties(board, {
   }
 });
 
-board.addEventListener('try', evt => {
+board.addEventListener('try', async evt => {
   const { index } = evt.detail;
-
-  if (board.matched.length === board.cards.length) {
-    console.log('game over');
-    return undefined;
-  }
 
   if (board.matched.includes(index)) {
     console.log('already matched');
@@ -55,5 +50,10 @@ board.addEventListener('try', evt => {
         board.revealed = [...board.matched];
       }, 4000);
     }
+  }
+
+  if (board.matched.length === board.cards.length) {
+    console.log('game over');
+    return undefined;
   }
 });

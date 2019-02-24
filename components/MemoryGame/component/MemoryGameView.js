@@ -4,6 +4,7 @@ MemoryGameView.innerHTML = `
   <style>
     :host {
       display: block;
+      perspective: 1800px;
     }
 
     ::slotted(*) {
